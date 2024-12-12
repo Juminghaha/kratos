@@ -1,0 +1,137 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /goodbye:
+        post:
+            tags:
+                - Greeter
+            operationId: Greeter_SayGoodbye
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.GoodbyeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.GoodbyeReply'
+    /helloworld/{name}:
+        get:
+            tags:
+                - Greeter
+            description: Sends a greeting
+            operationId: Greeter_SayHello
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /student/get:
+        get:
+            tags:
+                - Student
+            operationId: Student_GetStudent
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.student.v1.UserReply'
+    student/create:
+        post:
+            tags:
+                - Student
+            operationId: Student_CreateStudent
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.student.v1.CrStuReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.student.v1.Resp'
+components:
+    schemas:
+        api.student.v1.CrStuReq:
+            type: object
+            properties:
+                name:
+                    type: string
+                age:
+                    type: string
+                total:
+                    type: string
+        api.student.v1.Resp:
+            type: object
+            properties:
+                message:
+                    type: string
+        api.student.v1.UserReply:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    format: int32
+                message:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/api.student.v1.UserReply_Data'
+        api.student.v1.UserReply_Data:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                age:
+                    type: string
+                total:
+                    type: string
+        helloworld.v1.GoodbyeReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        helloworld.v1.GoodbyeRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+        helloworld.v1.HelloReply:
+            type: object
+            properties:
+                message:
+                    type: string
+            description: The response message containing the greetings
+tags:
+    - name: Greeter
+      description: The greeting service definition.
+    - name: Student

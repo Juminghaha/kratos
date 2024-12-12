@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package api.student.v1;
+import "google/api/annotations.proto";
+option go_package = "helloworld/api/student/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.student.v1";
+
+service Student {
+	rpc GetStudent (StudentReq) returns (UserReply){
+		option (google.api.http)={
+			get:"/student/get"
+		};
+	}
+	rpc CreateStudent(CrStuReq)returns(Resp){
+		option (google.api.http)={
+			post :"student/create"
+			body:"*"
+				};
+	}
+
+}
+
+message StudentReq{
+	int64 id =1;
+}
+message CrStuReq{
+	string name =1;
+	int64 age =2;
+	int64 total =3;
+
+}
+message UserReply {
+	int32 code = 1;
+	string message = 2;
+	message Data {
+		int64   id = 1;
+		string name =2;
+		int64 age =3;
+		int64 total =4;
+	}
+	Data data = 3;
+}
+message Resp{
+	string message=1;
+}

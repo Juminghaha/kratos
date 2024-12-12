@@ -1,0 +1,50 @@
+syntax = "proto3";
+package kratos.api;
+
+option go_package = "helloworld/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Server server = 1;
+  Data data = 2;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string user = 2;
+    string pwd = 3;
+    string uri = 4;
+    string network_type = 5;
+    string database = 6;
+    string protocol = 7;
+    string client_crt = 8;
+    string client_key = 9;
+    string ca_crt = 10;
+    string ssl_model = 11;
+  }
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration read_timeout = 3;
+    google.protobuf.Duration write_timeout = 4;
+  }
+  Database database = 1;
+  Redis redis = 2;
+}
